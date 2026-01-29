@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Académico v3.0</title>
+    
+    <link rel="stylesheet" href="static/css/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div id="loginOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(44, 62, 80, 0.95); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+    <div class="card" style="width: 350px; text-align: center; border-top-color: #f39c12;">
+        <h2>🔐 Acceso Restringido</h2>
+        <p>Sistema de Gestión Académica</p>
+        
+        <input type="text" id="loginUser" placeholder="Usuario (admin)">
+        <input type="password" id="loginPass" placeholder="Contraseña (admin123)">
+        
+        <button class="btn-purple" onclick="hacerLogin()" style="background-color: #f39c12;">Entrar</button>
+        <div id="msgLogin"></div>
+    </div>
+</div>
+
+<button id="btnSalir" onclick="hacerLogout()" style="display:none; width:auto; float:right; background:red;">Cerrar Sesión</button>
+
+    <header>
+        <h1>🏛️ Portal Académico UTESA</h1>
+        <p>Sistema de Gestión Universitaria Integrada</p>
+    </header>
+
+    <div id="appPrincipal" class="container" style="display: none;"> 
+
+        <div class="card" style="border-top-color: #8e44ad;">
+            <h2>👤 Nuevo Ingreso</h2>
+            <input type="text" id="nombreNuevo" placeholder="Nombre">
+            <input type="text" id="apellidoNuevo" placeholder="Apellido">
+            <select id="selectCarrera"><option>Cargando...</option></select>
+            <button class="btn-purple" onclick="registrarEstudiante()">Crear Estudiante</button>
+            <div id="resRegistro"></div>
+        </div>
+
+        <div class="card" style="border-top-color: #27ae60;">
+            <h2>📚 Inscribir Materia</h2>
+            <input type="number" id="idInscribir" placeholder="ID del Estudiante">
+            <select id="selectMateria"><option>Cargando...</option></select>
+            <button class="btn-green" onclick="realizarInscripcion()">Procesar Inscripción</button>
+            <div id="resInscripcion"></div>
+        </div>
+
+        <div class="card">
+            <h2>🔍 Historial</h2>
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2>🔍 Historial</h2>
+                    <button onclick="descargarExcel()" style="background-color: #217346; width: auto; padding: 5px 15px; font-size: 0.8rem;">
+                        📊 Descargar Excel
+                    </button>
+                </div>
+
+                <p style="font-size: 0.8rem; color: #666;">Ver calificaciones y honores.</p>
+
+            </div>
+            <input type="number" id="idBuscar" placeholder="ID del Estudiante">
+            <button class="btn-blue" onclick="buscarNotas()">Consultar</button>
+            <div id="resConsulta"></div>
+        </div>
+
+        <div class="card" style="border-top-color: #e74c3c; grid-column: 1 / -1;">
+            <h2>🕵️‍♂️ Auditoría (Admin)</h2>
+            <button class="btn-red" onclick="cargarAuditoria()">🔄 Cargar Logs</button>
+            <div id="tablaAuditoria" style="margin-top: 20px; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+
+        <div class="card" style="border-top-color: #3498db; grid-column: 1 / -1;">
+            <h2>🔎 Directorio Estudiantil</h2>
+            <p style="font-size: 0.8rem; color: #666;">Busca por nombre o apellido en tiempo real.</p>
+    
+            <input type="text" id="inputBusqueda" placeholder="Escribe un nombre aquí..." autocomplete="off">
+    
+            <div id="listaResultados" style="margin-top: 10px;"></div>
+        </div>
+
+        <div class="card" style="border-top-color: #f1c40f; grid-column: 1 / -1;">
+             <h2>📊 Distribución de Estudiantes</h2>
+    
+            <div style="height: 300px; width: 100%; display:flex; justify-content:center;">
+             <canvas id="graficoCarreras"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="static/js/logica.js"></script>
+
+</body>
+</html>
